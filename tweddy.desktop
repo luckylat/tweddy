@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Tweddy
+Exec=tweddy
+Comment=GUI Text editor *not* to programming
+Terminal=false
+Type=Application
+
