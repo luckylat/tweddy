@@ -15,7 +15,7 @@ func main() {
 		w.Option(app.Size(unit.Dp(800), unit.Dp(600)))
 
 		theme := material.NewTheme()
-		textEditor := widgets.NewTextEditor(theme)
+		editorWindow := widgets.NewEditorWindow(theme)
 
 		var ops op.Ops
 
@@ -27,8 +27,8 @@ func main() {
 				gtx := app.NewContext(&ops, e)
 
 				// Handle events and render
-				textEditor.HandleEvents(gtx)
-				textEditor.Layout(gtx)
+				editorWindow.HandleEvents(gtx)
+				editorWindow.Layout(gtx)
 
 				e.Frame(gtx.Ops)
 			}

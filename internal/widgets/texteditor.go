@@ -1,64 +1,25 @@
 package widgets
 
 import (
-	"gioui.org/io/key"
 	"gioui.org/layout"
 	"gioui.org/unit"
 	"gioui.org/widget"
 	"gioui.org/widget/material"
-	"simple-editor/internal/interaction"
 )
 
-// TextEditor widget that handles text editing and keyboard shortcuts
+// TextEditor widget that handles text editing
 type TextEditor struct {
-	theme    *material.Theme
-	editor   widget.Editor
-	fileOps  *interaction.FileOperations
+	theme  *material.Theme
+	editor widget.Editor
 }
 
 // NewTextEditor creates a new TextEditor widget
 func NewTextEditor(theme *material.Theme) *TextEditor {
 	return &TextEditor{
-		theme:   theme,
-		fileOps: interaction.NewFileOperations(),
+		theme: theme,
 	}
 }
 
-// HandleEvents processes keyboard shortcuts for the text editor
-func (te *TextEditor) HandleEvents(gtx layout.Context) {
-	// Handle Ctrl+S (Save)
-	for {
-		evt, ok := gtx.Event(key.Filter{Focus: &te.editor, Name: "S", Required: key.ModCtrl})
-		if !ok {
-			break
-		}
-		if e, ok := evt.(key.Event); ok && e.State == key.Press {
-			te.fileOps.SaveFile(&te.editor)
-		}
-	}
-
-	// Handle Ctrl+O (Open)
-	for {
-		evt, ok := gtx.Event(key.Filter{Focus: &te.editor, Name: "O", Required: key.ModCtrl})
-		if !ok {
-			break
-		}
-		if e, ok := evt.(key.Event); ok && e.State == key.Press {
-			te.fileOps.OpenFile(&te.editor)
-		}
-	}
-
-	// Handle Ctrl+N (New)
-	for {
-		evt, ok := gtx.Event(key.Filter{Focus: &te.editor, Name: "N", Required: key.ModCtrl})
-		if !ok {
-			break
-		}
-		if e, ok := evt.(key.Event); ok && e.State == key.Press {
-			te.fileOps.NewFile(&te.editor)
-		}
-	}
-}
 
 // Layout renders the text editor with proper padding
 func (te *TextEditor) Layout(gtx layout.Context) layout.Dimensions {
